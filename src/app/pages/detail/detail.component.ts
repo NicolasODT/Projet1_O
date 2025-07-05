@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { OlympicService } from 'src/app/core/services/olympic.service';
-import { Olympic } from 'src/app/core/models/Olympic';
-import {LineChartModule} from "@swimlane/ngx-charts";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {OlympicService} from 'src/app/core/services/olympic.service';
+import {Olympic} from 'src/app/core/models/Olympic';
 
 @Component({
   selector: 'app-detail',
