@@ -1,3 +1,27 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="container" *ngIf="chartData.length > 0; else loading">
+  <h2>Olympic games medals</h2>
+
+  <div class="info-boxes">
+    <div class="info-box">
+      <span>Number of JOs</span>
+      <strong>{{ numberOfJos }}</strong>
+    </div>
+    <div class="info-box">
+      <span>Number of countries</span>
+      <strong>{{ numberOfCountries }}</strong>
+    </div>
+  </div>
+
+  <ngx-charts-pie-chart
+    [results]="chartData"
+    [view]="[700, 400]"
+    [legend]="true"
+    [labels]="true"
+    [doughnut]="true"
+    (select)="onSelect($event)">
+  </ngx-charts-pie-chart>
+</div>
+
+<ng-template #loading>
+  <p>Loading data...</p>
+</ng-template>
