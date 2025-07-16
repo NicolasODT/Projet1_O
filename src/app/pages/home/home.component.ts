@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public olympics$: Observable<Olympic[] | undefined> = of([]);
   private subscription: Subscription | undefined;
 
-  // Données pour le graphique
+
   public chartData: { name: string; value: number; }[] = [];
   public numberOfJos = 0;
   public numberOfCountries = 0;
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         // On calcule le nombre de pays
         this.numberOfCountries = data.length;
 
-        // On prépare les données pour le graphique : { nom du pays, total des médailles }
+        // On prépare les données pour le graphique :
         this.chartData = data.map(olympic => ({
           name: olympic.country,
           value: olympic.participations.reduce((acc, curr) => acc + curr.medalsCount, 0),
