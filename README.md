@@ -46,7 +46,7 @@ Avant de commencer, assurez-vous d'avoir installé les logiciels suivants sur vo
 
 1.  **Clonez le dépôt de code source :**
     ```bash
-    git clone [https://github.com/NicolasODT/Projet1_O.git](https://github.com/NicolasODT/Projet1_O.git)
+    git clone https://github.com/NicolasODT/Projet1_O.git
     ```
 
 2.  **Naviguez jusqu'au répertoire du projet :**
