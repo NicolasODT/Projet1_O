@@ -1,8 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription, of } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Olympic } from 'src/app/core/models/Olympic';
+import { LegendPosition } from '@swimlane/ngx-charts'; // <-- 1. IMPORTER CECI
+
+// Interface pour typer les données du graphique et l'événement de sélection
+interface ChartData {
+  name: string;
+  value: number;
+  extra: { id: number };
+}
 
 @Component({
   selector: 'app-home',
@@ -10,30 +18,26 @@ import { Olympic } from 'src/app/core/models/Olympic';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public olympics$: Observable<Olympic[] | undefined> = of([]);
   private subscription: Subscription | undefined;
-
-
-  public chartData: { name: string; value: number; }[] = [];
+  private olympicData: Olympic[] = [];
+  public chartData: ChartData[] = [];
   public numberOfJos = 0;
   public numberOfCountries = 0;
+  public screenWidth!: number;
 
   constructor(private olympicService: OlympicService, private router: Router) {}
 
   ngOnInit(): void {
-    // On s'abonne aux données des JO
+    this.screenWidth = window.innerWidth;
     this.subscription = this.olympicService.getOlympics().subscribe(data => {
       if (data) {
-        // On calcule le nombre de pays
+        this.olympicData = data;
         this.numberOfCountries = data.length;
-
-        // On prépare les données pour le graphique :
         this.chartData = data.map(olympic => ({
           name: olympic.country,
           value: olympic.participations.reduce((acc, curr) => acc + curr.medalsCount, 0),
+          extra: { id: olympic.id },
         }));
-
-        // On calcule le nombre unique de JO
         const uniqueYears = new Set<number>();
         data.forEach(olympic => {
           olympic.participations.forEach(participation => {
@@ -45,19 +49,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Cette fonction sera appelée quand on clique sur un pays dans le graphique
-  onSelect(event: { name: string; value: number; }): void {
-    // On cherche l'ID du pays cliqué pour naviguer vers sa page de détail
-    this.olympicService.getOlympics().subscribe(data => {
-      const country = data?.find(o => o.country === event.name);
-      if (country) {
-        this.router.navigate(['/detail', country.id]);
-      }
-    }).unsubscribe(); // On se désabonne tout de suite
+  @HostListener('window:resize', ['$event'])
+  onResize(event?: Event): void {
+    this.screenWidth = window.innerWidth;
+  }
+
+  // 2. UTILISER LE TYPE ICI
+  get legendPosition(): LegendPosition {
+    return this.screenWidth < 768 ? LegendPosition.Below : LegendPosition.Right;
+  }
+
+  onSelect(event: ChartData): void {
+    if (event.extra && event.extra.id) {
+      this.router.navigate(['/detail', event.extra.id]);
+    }
   }
 
   ngOnDestroy(): void {
-    // On se désabonne pour éviter les fuites de mémoire
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

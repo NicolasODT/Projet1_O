@@ -12,14 +12,18 @@
     </div>
   </div>
 
-  <ngx-charts-pie-chart
-    [results]="chartData"
-    [view]="[700, 400]"
-    [legend]="true"
-    [labels]="true"
-    [doughnut]="false"
-    (select)="onSelect($event)">
-  </ngx-charts-pie-chart>
+  <div class="chart-container">
+    <ngx-charts-pie-chart
+      [results]="chartData"
+      [legend]="true"
+      [legendPosition]="legendPosition"
+      [labels]="true"
+      [doughnut]="false"
+      (select)="onSelect($event)"
+    >
+    </ngx-charts-pie-chart>
+  </div>
+
 </div>
 
 <ng-template #loading>

@@ -1,11 +1,12 @@
 <div class="container" *ngIf="countryData; else loadingOrError">
-  <button (click)="goBack()" class="back-button">← Back</button>
-  <h2>{{ countryData?.country }}</h2>
+  <button (click)="goBack()" class="back-button">← Retour</button>
+
+  <h2>{{ countryData.country }}</h2>
 
   <div class="info-boxes">
     <div class="info-box">
       <span>Number of entries</span>
-      <strong>{{ countryData?.participations?.length }}</strong>
+      <strong>{{ countryData.participations.length }}</strong>
     </div>
     <div class="info-box">
       <span>Total number medals</span>
@@ -17,20 +18,22 @@
     </div>
   </div>
 
-  <ngx-charts-line-chart
-    [results]="lineChartData"
-    [view]="[700, 400]"
-    [legend]="false"
-    [xAxis]="true"
-    [yAxis]="true"
-    [showXAxisLabel]="true"
-    [showYAxisLabel]="true"
-    xAxisLabel="Dates"
-    yAxisLabel="Medals">
-  </ngx-charts-line-chart>
+  <!-- On ajoute le conteneur pour le graphique ici -->
+  <div class="chart-container">
+    <ngx-charts-line-chart
+      [results]="lineChartData"
+      [legend]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      xAxisLabel="Dates"
+      yAxisLabel="Medals">
+    </ngx-charts-line-chart>
+  </div>
 
 </div>
 
 <ng-template #loadingOrError>
-  <p *ngIf="!countryData">Country data not found or still loading...</p>
+  <p *ngIf="!countryData">Données non trouvées ou en cours de chargement...</p>
 </ng-template>
