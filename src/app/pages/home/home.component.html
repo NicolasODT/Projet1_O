@@ -1,20 +1,20 @@
-<div class="container" *ngIf="chartData.length > 0; else loading">
+<div class="container" *ngIf="homePageData$ | async as data; else loading">
   <h2>Olympic games medals</h2>
 
   <div class="info-boxes">
     <div class="info-box">
       <span>Number of JOs</span>
-      <strong>{{ numberOfJos }}</strong>
+      <strong>{{ data.numberOfJos }}</strong>
     </div>
     <div class="info-box">
       <span>Number of countries</span>
-      <strong>{{ numberOfCountries }}</strong>
+      <strong>{{ data.numberOfCountries }}</strong>
     </div>
   </div>
 
   <div class="chart-container">
     <ngx-charts-pie-chart
-      [results]="chartData"
+      [results]="data.chartData"
       [legend]="true"
       [legendPosition]="legendPosition"
       [labels]="true"

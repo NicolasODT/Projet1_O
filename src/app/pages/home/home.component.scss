@@ -15,24 +15,34 @@ h1, h2 {
   color: #333;
 }
 
-// Conteneur pour les boîtes d'information
+h2 {
+  background-color: #008c95;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+
 .info-boxes {
   display: flex;
   justify-content: center;
   gap: 20px;
   margin: 20px 0;
-  width: 100%; // S'assure que les boîtes utilisent l'espace
+  width: 100%;
 }
 
-// Style pour chaque boîte d'information
+
 .info-box {
   padding: 20px;
   background-color: white;
-  border: 1px solid #ddd;
+  border: 3px solid #008c95;
   border-radius: 8px;
   min-width: 150px;
-  flex: 1; // Permet aux boîtes de grandir et de remplir l'espace
-  max-width: 250px; // Empêche les boîtes de devenir trop larges
+  flex: 1;
+  max-width: 250px;
+  text-align: center;
 
   span {
     display: block;
@@ -42,24 +52,20 @@ h1, h2 {
   strong {
     display: block;
     font-size: 2em;
-    color: #008cba;
+    color: #333;
   }
 }
 
-/*
-  ESSENTIEL : Style pour le conteneur du graphique
-  Ceci résout le problème d'espacement en donnant une hauteur fixe au conteneur.
-*/
+
 .chart-container {
-  // On définit une hauteur relative à la hauteur de l'écran (60% de la hauteur visible).
   height: 60vh;
-  width: 100%; // S'assure qu'il prend toute la largeur disponible
-  max-width: 900px; // Limite la largeur maximale du graphique sur de très grands écrans
+  width: 100%;
+  max-width: 900px;
   margin-top: 20px;
 }
 
 
-/* Modifications pour les petits écrans (responsive) */
+
 @media (max-width: 768px) {
   .info-boxes {
     flex-direction: column;
@@ -72,7 +78,7 @@ h1, h2 {
   }
 
   .chart-container {
-    // On peut ajuster la hauteur pour les mobiles si besoin
+
     height: 50vh;
   }
 }
