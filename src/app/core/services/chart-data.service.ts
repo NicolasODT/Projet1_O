@@ -1,23 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Olympic } from '../models/Olympic';
 import { OlympicService } from './olympic.service';
-
-// Interface pour les données de la page d'accueil
-export interface HomePageData {
-  chartData: { name: string; value: number; extra: { id: number } }[];
-  numberOfJos: number;
-  numberOfCountries: number;
-}
-
-// Interface pour les données de la page de détail
-export interface DetailPageData {
-  countryData: Olympic;
-  lineChartData: { name: string; series: { name: string; value: number }[] }[];
-  totalMedals: number;
-  totalAthletes: number;
-}
+import { HomePageData } from '../models/HomePageData';
+import { DetailPageData } from '../models/DetailPageData';
 
 @Injectable({
   providedIn: 'root'

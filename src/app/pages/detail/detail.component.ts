@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { ChartDataService, DetailPageData } from 'src/app/core/services/chart-data.service';
+import { ChartDataService } from 'src/app/core/services/chart-data.service';
+import { DetailPageData } from 'src/app/core/models/DetailPageData';
 
 @Component({
   selector: 'app-detail',

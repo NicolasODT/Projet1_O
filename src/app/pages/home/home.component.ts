@@ -2,7 +2,8 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { LegendPosition } from '@swimlane/ngx-charts';
-import { ChartDataService, HomePageData } from 'src/app/core/services/chart-data.service';
+import { ChartDataService } from 'src/app/core/services/chart-data.service';
+import { HomePageData } from 'src/app/core/models/HomePageData';
 
 // Interface pour l'événement de sélection
 interface ChartSelectEvent {
